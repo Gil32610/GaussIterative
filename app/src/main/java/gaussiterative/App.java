@@ -11,7 +11,6 @@ public class App {
     }
 
     public static void main(String[] args) {
-        System.out.println(new App().getGreeting());
         GaussJacobiIterative gauss = new GaussJacobiIterative();
         double[][] matrix = { { 5, 1, 1 }, { 3, 4, 1 }, { 3, 3, 6 } };
         double[] result = { 5, 6, 0 };
