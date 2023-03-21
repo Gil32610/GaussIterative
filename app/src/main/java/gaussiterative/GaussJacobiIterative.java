@@ -10,31 +10,43 @@ public class GaussJacobiIterative {
 
     private boolean isSolution(double[] result, double[] solution) {
         boolean equal = false;
+        double[]vector = multiplication(solution);
         for (int i = 0; i < solution.length; i++) {
-            if (result[i] != solution[i])
-                return equal;
+            double absolute = Math.abs((result[i]-vector[i]));
+            if(absolute <= 0.1){
+                continue;
+            }
+            return equal;
         }
         return !equal;
     }
 
+    private double[] multiplication(double[] result){
+        double[] multiplication = new double[result.length];
+        for(int i = 0; i<matrix.length; i++){
+            for(int j = 0; j<matrix[0].length;j++){
+                multiplication[i] += matrix[i][j]*result[j];
+            }
+        }
+        return multiplication;
+
+    }
+
     public void setResult(double[] result) {
         this.result = result;
+        findSolution();
     }
 
     public void setMatrix(double[][] matrix) {
         this.matrix = matrix;
     }
 
-    public double[] getVariables() {
-        findSolution();
-        return variables;
-    }
 
     private void findSolution() {
         double[] variables = { 0, 0, 0 };
 
-        for (int j = 0; !isSolution(result, varaibles); j++) {
-            int currentPos = j % varaibles.length;
+        for (int j = 0; !isSolution(result, variables); j++) {
+            int currentPos = j % variables.length;
             converge = j;
             switch (currentPos) {
                 case 0 ->
@@ -59,7 +71,7 @@ public class GaussJacobiIterative {
             for (int i = 0; i < variables.length; i++) {
                 if (i == variables.length - 1)
                     tripleVar += variables[i] + ")";
-                tripleVar += variables[i] + ", ";
+                else tripleVar += variables[i] + ", ";
             }
         }
         return tripleVar;
