@@ -12,9 +12,9 @@ public class App {
 
     public static void main(String[] args) {
         System.out.println(new App().getGreeting());
-        double[] solution = { 12, 3, 4 };
-        double[] result = { 12, 3, 4 };
-       boolean check = GaussJacobiIterative.isSolution(result, solution);
-       System.out.println(check);
+        GaussJacobiIterative gauss = new GaussJacobiIterative();
+        
+        System.out.println(gauss);
+       
     }
 }

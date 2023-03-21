@@ -16,7 +16,8 @@ public class GaussJacobiIterative {
         }
         return !equal;
     }
-    public void setResult(double[]result){
+
+    public void setResult(double[] result) {
         this.result = result;
     }
 
@@ -24,11 +25,10 @@ public class GaussJacobiIterative {
         this.matrix = matrix;
     }
 
-    public double[] getVariables(){
+    public double[] getVariables() {
         findSolution();
         return variables;
     }
-
 
     private void findSolution() {
         double[] variables = { 0, 0, 0 };
@@ -52,7 +52,33 @@ public class GaussJacobiIterative {
         this.variables = variables;
     }
 
-    private String printVariables(double[] variables){
-        return null;
+    private String variables(double[] variables) {
+        String tripleVar = "";
+        if (variables != null) {
+            tripleVar += "(";
+            for (int i = 0; i < variables.length; i++) {
+                if (i == variables.length - 1)
+                    tripleVar += variables[i] + ")";
+                tripleVar += variables[i] + ", ";
+            }
+        }
+        return tripleVar;
+    }
+
+    private String matrixToString(double[][] table) {
+        String system = "";
+        if (table != null) {
+            for (int i = 0; i < table.length; i++) {
+                for (int j = 0; j < table[0].length; j++) {
+                    system += (!(j == table[0].length - 1) ? table[i][j] + "  " : table[i][j] + "\n");
+                }
+            }
+        }
+        return system;
+    }
+
+    public String toString() {
+        return "Matrix: \n" + matrixToString(matrix) + "\nSystem result: \n" + variables(result) + "\nSolution: \n"
+                + variables(variables)+ "\nThe result converged at " + converge + " iteration.";
     }
 }
